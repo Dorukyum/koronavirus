@@ -5,6 +5,8 @@ setup(
   version = '0.1',
   license='MIT',
   description = 'Koronavirüs (Covid-19) verilerine erişmenizi sağlayan bir Python modülü.',
+  long_description = open("README.md").read(),
+  long_description_content_type = "text/markdown",
   author = 'Dorukyum',
   author_email = 'no.email@not.now.com',
   url = 'https://github.com/user/reponame',
