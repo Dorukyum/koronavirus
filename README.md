@@ -1,5 +1,6 @@
 # koronavirus
 Koronavirüs (Covid-19) verilerine erişmenizi sağlayan bir Python modülü.
+Verilerin kaynağı: [NovelCOVID API](https://disease.sh/)
 
 ## Örnek Kullanım
 ```python
@@ -11,6 +12,6 @@ veriler =  korona("Turkey") # veya korona()
 print(veriler)
 
 # async hâli
-veriler = await async_korona("Turkey") # veya async_korona()
+veriler = async_korona("Turkey") # veya async_korona()
 print(veriler)
 ```

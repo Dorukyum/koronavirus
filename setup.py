@@ -5,11 +5,9 @@ setup(
   version = '0.1',
   license='MIT',
   description = 'Koronavirüs (Covid-19) verilerine erişmenizi sağlayan bir Python modülü.',
-  long_description = open("README.md").read(),
-  long_description_content_type = "text/markdown",
   author = 'Dorukyum',
   author_email = 'no.email@not.now.com',
-  url = 'https://github.com/user/reponame',
+  url = 'https://github.com/Dorukyum/koronavirus',
   download_url = 'https://github.com/user/reponame/archive/v_01.tar.gz',
   keywords = ['API', 'TÜRKÇE', 'COVID', 'KORONA'],
   install_requires=["requests", "aiohttp"]
