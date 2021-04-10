@@ -11,6 +11,6 @@ veriler =  korona("Turkey") # veya korona()
 print(veriler)
 
 # async hâli
-veriler = async_korona("Turkey") # veya async_korona()
+veriler = await async_korona("Turkey") # veya async_korona()
 print(veriler)
 ```
