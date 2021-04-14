@@ -19,7 +19,7 @@ turkce = {
 }
 
 
-class Hata(BaseException):
+class KoronavirusVeriHatasi(BaseException):
     pass
 
 
@@ -28,8 +28,8 @@ def korona(ulke: str = "Turkey") -> dict:
         f"https://disease.sh/v3/covid-19/countries/{ulke}?yesterday=0&twoDaysAgo=0"
     )
     if response.status_code != 200:
-        raise Hata(
-            "bir hata oluştu. Ülke adı İngilizce olmayabilir veya bu ülke ile ilgili veriler bulunmuyor olabilir."
+        raise KoronavirusVeriHatasi(
+            "Bir hata oluştu. Ülke adı İngilizce olmayabilir veya bu ülke ile ilgili veriler bulunmuyor olabilir."
         )
     data = response.json()
     turkce_data = {}
@@ -47,8 +47,8 @@ async def async_korona(ulke: str = "Turkey") -> dict:
             f"https://disease.sh/v3/covid-19/countries/{ulke}?yesterday=0&twoDaysAgo=0"
         )
     if response.status != 200:
-        raise Hata(
-            "bir hata oluştu. Ülke adı İngilizce olmayabilir veya bu ülke ile ilgili veriler bulunmuyor olabilir."
+        raise KoronavirusVeriHatasi(
+            "Bir hata oluştu. Ülke adı İngilizce olmayabilir veya bu ülke ile ilgili veriler bulunmuyor olabilir."
         )
     data = await response.json()
     turkce_data = {}

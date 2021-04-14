@@ -1,2 +1,5 @@
 **/__pycache__
 *.pyc
+**/koronavirus.egg-info
+**/dist
+**/build
