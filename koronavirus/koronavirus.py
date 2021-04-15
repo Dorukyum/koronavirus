@@ -1,11 +1,11 @@
 import requests, aiohttp
 
 turkce = {
-    "updated": "güncellendi",
+    "updated": "son_güncelleme",
     "cases": "vaka",
     "todayCases": "bugünkü_vaka",
     "deaths": "ölüm",
-    "todayDeaths": "bugünk_ölüm",
+    "todayDeaths": "bugünkü_ölüm",
     "recovered": "iyileşen",
     "todayRecovered": "bugünkü_iyileşen",
     "active": "aktif_vaka",
@@ -17,10 +17,6 @@ turkce = {
     "population": "nüfus",
     "continent": "kıta",
 }
-
-
-class KoronavirusVeriHatasi(BaseException):
-    pass
 
 
 def korona(ulke: str = "Turkey") -> dict:
@@ -58,3 +54,7 @@ async def async_korona(ulke: str = "Turkey") -> dict:
         except KeyError:
             continue
     return turkce_data
+
+
+class KoronavirusVeriHatasi(BaseException):
+    pass
