@@ -15,7 +15,7 @@ GitHub: https://github.com/Dorukyum/koronavirus/
 from koronavirus import *
 
 # Türkiye'nin koronavirüs verilerini al
-veriler =  korona("Turkey") # veya korona()
+veriler = korona("Turkey") # veya korona()
 print(veriler)
 
 # async hâli
