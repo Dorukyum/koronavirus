@@ -1,6 +1,12 @@
-import requests, aiohttp
+from typing import Dict, Union
 
-turkce = {
+import aiohttp
+import requests
+
+__all__ = ("KoronavirusVeriHatasi", "korona", "async_korona")
+
+KoronavirusVerisi = Dict[str, Union[float, int, str]]
+sozluk: Dict[str, str] = {
     "updated": "son_güncelleme",
     "cases": "vaka",
     "todayCases": "bugünkü_vaka",
@@ -17,44 +23,39 @@ turkce = {
     "population": "nüfus",
     "continent": "kıta",
 }
-
-
-def korona(ulke: str = "Turkey") -> dict:
-    response = requests.get(
-        f"https://disease.sh/v3/covid-19/countries/{ulke}?yesterday=0&twoDaysAgo=0"
-    )
-    if response.status_code != 200:
-        raise KoronavirusVeriHatasi(
-            "Bir hata oluştu. Ülke adı İngilizce olmayabilir veya bu ülke ile ilgili veriler bulunmuyor olabilir."
-        )
-    data = response.json()
-    turkce_data = {}
-    for key in data.keys():
-        try:
-            turkce_data[turkce[key]] = data[key]
-        except KeyError:
-            continue
-    return turkce_data
-
-
-async def async_korona(ulke: str = "Turkey") -> dict:
-    async with aiohttp.ClientSession() as ses:
-        response = await ses.get(
-            f"https://disease.sh/v3/covid-19/countries/{ulke}?yesterday=0&twoDaysAgo=0"
-        )
-    if response.status != 200:
-        raise KoronavirusVeriHatasi(
-            "Bir hata oluştu. Ülke adı İngilizce olmayabilir veya bu ülke ile ilgili veriler bulunmuyor olabilir."
-        )
-    data = await response.json()
-    turkce_data = {}
-    for key in data.keys():
-        try:
-            turkce_data[turkce[key]] = data[key]
-        except KeyError:
-            continue
-    return turkce_data
+URL = "https://disease.sh/v3/covid-19/countries/{ulke}?yesterday=0&twoDaysAgo=0"
 
 
 class KoronavirusVeriHatasi(BaseException):
-    pass
+    def __init__(self, response) -> None:
+        super().__init__(f"Bir hata oluştu: {response['message']}")
+
+
+def turkcelestir(data: KoronavirusVerisi) -> KoronavirusVerisi:
+    turkce_data = {}
+    for key in data.keys():
+        try:
+            turkce_data[sozluk[key]] = data[key]
+        except KeyError:
+            continue
+
+    return turkce_data
+
+
+def korona(ulke: str = "Turkey") -> KoronavirusVerisi:
+    response = requests.get(URL.format(ulke=ulke))
+    r = response.json()
+    if response.status_code != 200:
+        raise KoronavirusVeriHatasi(r)
+
+    return turkcelestir(r)
+
+
+async def async_korona(ulke: str = "Turkey") -> KoronavirusVerisi:
+    async with aiohttp.ClientSession() as ses:
+        response = await ses.get(URL.format(ulke=ulke))
+    r = await response.json()
+    if response.status != 200:
+        raise KoronavirusVeriHatasi(r)
+
+    return turkcelestir(r)
