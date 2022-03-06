@@ -10,15 +10,23 @@ GitHub: https://github.com/Dorukyum/koronavirus/
 ## Kurulum
 **İndirmek için:** ```pip install koronavirus```
 ## Örnek Kullanım
+### Senkron
 ```python
 # modülü içeri aktar
-from koronavirus import *
+from koronavirus import korona
 
 # Türkiye'nin koronavirüs verilerini al
-veriler = korona("Turkey") # veya korona()
+veriler = korona("Turkey") # veya korona("tr")
 print(veriler)
+```
 
-# async hâli
-veriler = await async_korona("Turkey") # veya async_korona()
-print(veriler)
+### Asenkron
+```python
+# modülü içeri aktar
+from koronavirus import async_korona as korona
+
+# Türkiye'nin koronavirüs verilerini al
+async def main():
+    veriler = await korona("Turkey") # veya korona("tr")
+    print(veriler)
 ```
