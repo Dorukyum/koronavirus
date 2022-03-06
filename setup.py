@@ -11,7 +11,7 @@ classifiers = [
 setup(
     name="koronavirus",
     packages=find_packages(),
-    version="0.0.2",
+    version="1.0.0",
     license="MIT",
     description="Koronavirüs (Covid-19) verilerine erişmenizi sağlayan bir Python modülü.",
     long_description=open("README.md").read(),
